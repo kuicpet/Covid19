@@ -1,5 +1,5 @@
+/* eslint-disable max-len */
 const covid19ImpactEstimator = (data) => data;
-
 const data = {
   region: {
     name: 'Africa',
@@ -16,11 +16,15 @@ const data = {
 const estimates = () => {
   const currentlyInfected = data.reportedCases * 10;
   const infectionsByRequestedTime = currentlyInfected * 512;
+  const periodType = 'days';
+  const timeToElapse = 58;
   const severeCasesByRequestedTime = infectionsByRequestedTime * 0.15;
   const output = {
     data: {},
-    impact: { currentlyInfected, infectionsByRequestedTime, severeCasesByRequestedTime },
-    severeImpact: {}
+    impact: {
+      currentlyInfected, infectionsByRequestedTime, periodType, timeToElapse, severeCasesByRequestedTime
+    },
+    severeImpact: { currentlyInfected: data.reportedCases * 50 }
   };
   return output;
 };
