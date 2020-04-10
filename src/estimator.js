@@ -1,6 +1,8 @@
+
 /* eslint-disable max-len */
 const covid19ImpactEstimator = (data) => data;
-const data = {
+
+const input = {
   region: {
     name: 'Africa',
     avgAge: 19.7,
@@ -13,20 +15,44 @@ const data = {
   population: 66622705,
   totalHospitalBeds: 1380614
 };
-const estimates = () => {
-  const currentlyInfected = data.reportedCases * 10;
+const period = () => {
+  if (input.periodType === 'months') {
+    return input.timeToElapse * 30;
+  } if (input.periodType === 'weeks') {
+    return input.timeToElapse * 7;
+  } if (input.periodType === 'days') {
+    return input.timeToElapse * 1;
+  }
+  return 0;
+};
+period();
+const impact = () => {
+  const currentlyInfected = input.reportedCases * 10;
   const infectionsByRequestedTime = currentlyInfected * 512;
   const periodType = 'days';
-  const timeToElapse = 58;
-  const severeCasesByRequestedTime = infectionsByRequestedTime * 0.15;
+  const timeToElapse = period();
   const output = {
-    data: {},
     impact: {
-      currentlyInfected, infectionsByRequestedTime, periodType, timeToElapse, severeCasesByRequestedTime
-    },
-    severeImpact: { currentlyInfected: data.reportedCases * 50 }
+      currentlyInfected, infectionsByRequestedTime, periodType, timeToElapse
+    }
   };
   return output;
 };
-estimates();
+impact();
+
+const severe = () => {
+  const currentlyInfected = input.reportedCases * 50;
+  const infectionsByRequestedTime = currentlyInfected * 512;
+  const periodType = 'days';
+  const timeToElapse = period();
+  const output = {
+    data: { input },
+    impact: impact(),
+    severeImpact: {
+      currentlyInfected, infectionsByRequestedTime, periodType, timeToElapse
+    }
+  };
+  return output;
+};
+severe();
 export default covid19ImpactEstimator;
