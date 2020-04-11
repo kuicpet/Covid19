@@ -68,7 +68,7 @@ const severeInDays = () => {
   const severeCasesByRequestedTime = infectionsByRequestedTime * 0.15;
   const hospitalBedsByRequestedTime = beds() - severeCasesByRequestedTime;
   const output = {
-    data: { input },
+    data: {},
     impact: impactInDays(),
     severeImpact: {
       currentlyInfected, infectionsByRequestedTime, severeCasesByRequestedTime, hospitalBedsByRequestedTime
@@ -100,7 +100,7 @@ const severeInWeeks = () => {
   const severeCasesByRequestedTime = infectionsByRequestedTime * 0.15;
   const hospitalBedsByRequestedTime = beds() - severeCasesByRequestedTime;
   const output = {
-    data: { input },
+    data: {},
     impact: impactInWeeks(),
     severeImpact: {
       currentlyInfected, infectionsByRequestedTime, severeCasesByRequestedTime, hospitalBedsByRequestedTime
@@ -132,7 +132,7 @@ const severeInMths = () => {
   const severeCasesByRequestedTime = infectionsByRequestedTime * 0.15;
   const hospitalBedsByRequestedTime = beds() - severeCasesByRequestedTime;
   const output = {
-    data: { input },
+    data: {},
     impact: impactInMths(),
     severeImpact: {
       currentlyInfected, infectionsByRequestedTime, severeCasesByRequestedTime, hospitalBedsByRequestedTime
