@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 
 /* eslint-disable max-len */
 const covid19ImpactEstimator = (data) => data;
@@ -9,21 +10,18 @@ const input = {
     avgDailyIncomeInUSD: 5,
     avgDailyIncomePopulation: 0.71
   },
-  periodType: 'days',
-  timeToElapse: 58,
-  reportedCases: 674,
-  population: 66622705,
-  totalHospitalBeds: 1380614
+  periodType: 'weeks',
+  timeToElapse: 38,
+  reportedCases: 2747,
+  population: 92931687,
+  totalHospitalBeds: 678874
 };
 const period = () => {
-  if (input.periodType === 'days') {
-    return input.timeToElapse;
-  } if (input.periodType === 'weeks') {
-    return input.timeToElapse * 7;
-  } if (input.periodType === 'months') {
-    return input.timeToElapse * 30;
-  }
-  return 0;
+  const { timeToElapse } = input;
+  if (input.periodType === 'months') return timeToElapse * 30;
+  if (input.periodType === 'weeks') return timeToElapse * 7;
+  if (input.periodType === 'days') return timeToElapse;
+  return input;
 };
 period();
 
@@ -57,6 +55,7 @@ const estimates = () => {
       infectionsByRequestedTime: severeInfectionsByRequestedTime
     }
   };
+  console.log(output);
   return output;
 };
 estimates();
