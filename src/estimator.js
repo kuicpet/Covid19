@@ -41,21 +41,15 @@ const beds = () => {
 };
 beds();
 
+
 const impactInDays = () => {
   const currentlyInfected = input.reportedCases * 10;
   const infectionsByRequestedTime = currentlyInfected * factor();
-  const severeCasesByRequestedTime = infectionsByRequestedTime * 0.15;
-  const hospitalBedsByRequestedTime = beds() - severeCasesByRequestedTime;
   const { periodType } = input;
   const timeToElapse = period();
   const output = {
     impact: {
-      currentlyInfected,
-      infectionsByRequestedTime,
-      periodType,
-      timeToElapse,
-      severeCasesByRequestedTime,
-      hospitalBedsByRequestedTime
+      currentlyInfected, infectionsByRequestedTime, periodType, timeToElapse
     }
   };
   return output;
@@ -65,13 +59,11 @@ impactInDays();
 const severeInDays = () => {
   const currentlyInfected = input.reportedCases * 50;
   const infectionsByRequestedTime = currentlyInfected * factor();
-  const severeCasesByRequestedTime = infectionsByRequestedTime * 0.15;
-  const hospitalBedsByRequestedTime = beds() - severeCasesByRequestedTime;
   const output = {
-    data: {},
+    data: { input },
     impact: impactInDays(),
     severeImpact: {
-      currentlyInfected, infectionsByRequestedTime, severeCasesByRequestedTime, hospitalBedsByRequestedTime
+      currentlyInfected, infectionsByRequestedTime
     }
   };
   return output;
@@ -81,13 +73,11 @@ severeInDays();
 const impactInWeeks = () => {
   const currentlyInfected = input.reportedCases * 10;
   const infectionsByRequestedTime = currentlyInfected * factor();
-  const severeCasesByRequestedTime = infectionsByRequestedTime * 0.15;
-  const hospitalBedsByRequestedTime = beds() - severeCasesByRequestedTime;
   const { periodType } = input;
   const timeToElapse = period();
   const output = {
     impact: {
-      currentlyInfected, infectionsByRequestedTime, periodType, timeToElapse, severeCasesByRequestedTime, hospitalBedsByRequestedTime
+      currentlyInfected, infectionsByRequestedTime, periodType, timeToElapse
     }
   };
   return output;
@@ -97,13 +87,11 @@ impactInWeeks();
 const severeInWeeks = () => {
   const currentlyInfected = input.reportedCases * 50;
   const infectionsByRequestedTime = currentlyInfected * factor();
-  const severeCasesByRequestedTime = infectionsByRequestedTime * 0.15;
-  const hospitalBedsByRequestedTime = beds() - severeCasesByRequestedTime;
   const output = {
-    data: {},
+    data: { input },
     impact: impactInWeeks(),
     severeImpact: {
-      currentlyInfected, infectionsByRequestedTime, severeCasesByRequestedTime, hospitalBedsByRequestedTime
+      currentlyInfected, infectionsByRequestedTime
     }
   };
   return output;
@@ -113,13 +101,11 @@ severeInWeeks();
 const impactInMths = () => {
   const currentlyInfected = input.reportedCases * 10;
   const infectionsByRequestedTime = currentlyInfected * factor();
-  const severeCasesByRequestedTime = infectionsByRequestedTime * 0.15;
-  const hospitalBedsByRequestedTime = beds() - severeCasesByRequestedTime;
   const { periodType } = input;
   const timeToElapse = period();
   const output = {
     impact: {
-      currentlyInfected, infectionsByRequestedTime, periodType, timeToElapse, severeCasesByRequestedTime, hospitalBedsByRequestedTime
+      currentlyInfected, infectionsByRequestedTime, periodType, timeToElapse
     }
   };
   return output;
@@ -129,13 +115,11 @@ impactInMths();
 const severeInMths = () => {
   const currentlyInfected = input.reportedCases * 50;
   const infectionsByRequestedTime = currentlyInfected * factor();
-  const severeCasesByRequestedTime = infectionsByRequestedTime * 0.15;
-  const hospitalBedsByRequestedTime = beds() - severeCasesByRequestedTime;
   const output = {
-    data: {},
+    data: { input },
     impact: impactInMths(),
     severeImpact: {
-      currentlyInfected, infectionsByRequestedTime, severeCasesByRequestedTime, hospitalBedsByRequestedTime
+      currentlyInfected, infectionsByRequestedTime
     }
   };
   return output;
