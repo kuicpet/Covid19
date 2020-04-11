@@ -17,7 +17,7 @@ const input = {
 };
 const period = () => {
   if (input.periodType === 'days') {
-    return input.timeToElapse * 1;
+    return input.timeToElapse;
   } if (input.periodType === 'weeks') {
     return input.timeToElapse * 7;
   } if (input.periodType === 'months') {
@@ -35,8 +35,8 @@ const factor = () => {
 factor();
 
 const beds = () => {
-  const a = (input.totalHospitalBeds * 0.35);
-  const b = Math.trunc(a);
+  const a = input.totalHospitalBeds * 0.35;
+  const b = (Math.trunc(a));
   return b;
 };
 beds();
