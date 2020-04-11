@@ -87,7 +87,7 @@ const impactInWeeks = () => {
   const timeToElapse = period();
   const output = {
     impact: {
-      currentlyInfected, infectionsByRequestedTime, periodType, timeToElapse, severeCasesByRequestedTime,hospitalBedsByRequestedTime
+      currentlyInfected, infectionsByRequestedTime, periodType, timeToElapse, severeCasesByRequestedTime, hospitalBedsByRequestedTime
     }
   };
   return output;
