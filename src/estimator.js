@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 
 /* eslint-disable max-len */
 const covid19ImpactEstimator = (data) => data;
@@ -39,25 +38,26 @@ const beds = () => {
 };
 beds();
 
-const estimates = () => {
+const impactEstimates = () => {
   const impactCurrentlyInfected = input.reportedCases * 10;
   const impactInfectionsByRequestedTime = impactCurrentlyInfected * factor();
   const severeCurrentlyInfected = input.reportedCases * 50;
   const severeInfectionsByRequestedTime = severeCurrentlyInfected * factor();
   const output = {
-    input,
-    impact: {
-      currentlyInfected: impactCurrentlyInfected,
-      infectionsByRequestedTime: impactInfectionsByRequestedTime
-    },
-    severeImpact: {
-      currentlyInfected: severeCurrentlyInfected,
-      infectionsByRequestedTime: severeInfectionsByRequestedTime
+    estimates: {
+      impact: {
+        currentlyInfected: impactCurrentlyInfected,
+        infectionsByRequestedTime: impactInfectionsByRequestedTime
+      },
+      severeImpact: {
+        currentlyInfected: severeCurrentlyInfected,
+        infectionsByRequestedTime: severeInfectionsByRequestedTime
+      }
     }
   };
-  console.log(output);
+  // console.log(output);
   return output;
 };
-estimates();
+impactEstimates();
 
 export default covid19ImpactEstimator;
