@@ -110,7 +110,11 @@ of the region, estimate how much money the economy is likely to lose over the sa
 dollarsInFlight in your output data structure. E.g if 65% of the region (the majority) earn $1.5 a day,
 you can compute dollarsInFlight over a 30 day period as:
 
-(infectionsByRequestedTime x 0.65) x 1.5 x 30;
+(infectionsByRequestedTime x 0.65 x 1.5) / 30;
+
+#UPDATE: Though dollarsInFlight is a monetary value, treat it like the other values you have
+#computed - discard the decimal portion, such that 4732.645 becomes 4732.
+
 
 PS: At this point, you've now completed the first part of building your estimator. Did you notice
 that it is not accounting for deaths or recoveries over time? This is a novelty estimator, but we

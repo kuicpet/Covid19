@@ -29,7 +29,7 @@ period();
 
 const factor = () => {
   const x = input.timeToElapse / 3;
-  const y = 2 ** Math.trunc(x);
+  const y = (2 ** Math.trunc(x));
   return y;
 };
 factor();
@@ -117,4 +117,5 @@ const severeInMths = () => {
   return output;
 };
 severeInMths();
+
 export default covid19ImpactEstimator;
