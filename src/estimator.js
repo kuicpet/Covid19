@@ -35,9 +35,9 @@ const factor = () => {
 factor();
 
 const beds = () => {
-  const x = input.totalHospitalBeds * 0.35;
-  const y = Math.trunc(x);
-  return y;
+  const a = (input.totalHospitalBeds * 0.35);
+  const b = Math.trunc(a);
+  return b;
 };
 beds();
 
