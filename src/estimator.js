@@ -17,9 +17,9 @@ const input = {
 };
 
 const period = () => {
-  if (input.periodType === 'months') return input.timeToElapse * 30;
-  if (input.periodType === 'weeks') return input.timeToElapse * 7;
-  if (input.periodType === 'days') return input.timeToElapse * 1;
+  if (input.periodType === 'months') return input.timeToElapse / 30;
+  if (input.periodType === 'weeks') return input.timeToElapse / 7;
+  if (input.periodType === 'days') return input.timeToElapse / 1;
   return 0;
 };
 period();
