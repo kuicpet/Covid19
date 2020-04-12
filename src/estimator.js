@@ -16,49 +16,58 @@ const input = {
   totalHospitalBeds: 1380614
 };
 
-const period = () => {
-  if (input.periodType === 'months') return input.timeToElapse / 30;
-  if (input.periodType === 'weeks') return input.timeToElapse / 7;
-  if (input.periodType === 'days') return input.timeToElapse / 1;
+const impact = () => {
+  if (input.periodType === 'months') {
+    const days = input.timeToElapse * 30;
+    const currentlyInfected = input.reportedCases * 10;
+    const infectionsByRequestedTime = currentlyInfected * (2 ** (Math.trunc(days / 3)));
+    return { currentlyInfected, infectionsByRequestedTime };
+  }
+  if (input.periodType === 'weeks') {
+    const days = input.timeToElapse * 7;
+    const currentlyInfected = input.reportedCases * 10;
+    const infectionsByRequestedTime = currentlyInfected * (2 ** (Math.trunc(days / 3)));
+    return { currentlyInfected, infectionsByRequestedTime };
+  }
+  if (input.periodType === 'days') {
+    const days = input.timeToElapse;
+    const currentlyInfected = input.reportedCases * 10;
+    const infectionsByRequestedTime = currentlyInfected * (2 ** (Math.trunc(days / 3)));
+    return { currentlyInfected, infectionsByRequestedTime };
+  }
   return 0;
 };
-period();
-
-const factor = () => {
-  const x = (Math.trunc(period() / 3));
-  const y = (2 ** x);
-  return y;
+impact();
+const severe = () => {
+  if (input.periodType === 'months') {
+    const days = input.timeToElapse * 30;
+    const currentlyInfected = input.reportedCases * 50;
+    const infectionsByRequestedTime = currentlyInfected * (2 ** (Math.trunc(days / 3)));
+    return { currentlyInfected, infectionsByRequestedTime };
+  }
+  if (input.periodType === 'weeks') {
+    const days = input.timeToElapse * 7;
+    const currentlyInfected = input.reportedCases * 50;
+    const infectionsByRequestedTime = currentlyInfected * (2 ** (Math.trunc(days / 3)));
+    return { currentlyInfected, infectionsByRequestedTime };
+  }
+  if (input.periodType === 'days') {
+    const days = input.timeToElapse;
+    const currentlyInfected = input.reportedCases * 50;
+    const infectionsByRequestedTime = currentlyInfected * (2 ** (Math.trunc(days / 3)));
+    return { currentlyInfected, infectionsByRequestedTime };
+  }
+  return 0;
 };
-factor();
-/* const beds = () => {
-  const a = input.totalHospitalBeds * 0.35;
-  const b = (Math.trunc(a));
-  return b;
-};
-beds(); */
+severe();
 
-const impactEstimates = () => {
-  const multiplier = factor();
-  const impactCurrentlyInfected = input.reportedCases * 10;
-  const impactInfectionsByRequestedTime = (impactCurrentlyInfected * multiplier);
-  const severeCurrentlyInfected = input.reportedCases * 50;
-  const severeInfectionsByRequestedTime = (severeCurrentlyInfected * multiplier);
-  const output = {
-    // periodType: input.periodType,
-    // timeToElapse: period(),
-    estimates: {
-      impact: {
-        currentlyInfected: impactCurrentlyInfected,
-        infectionsByRequestedTime: impactInfectionsByRequestedTime
-      },
-      severeImpact: {
-        currentlyInfected: severeCurrentlyInfected,
-        infectionsByRequestedTime: severeInfectionsByRequestedTime
-      }
-    }
+const output = () => {
+  const estimates = {
+    input,
+    impact: impact(),
+    severe: severe()
   };
-  return output;
+  return estimates;
 };
-impactEstimates();
-
+output();
 export default covid19ImpactEstimator;
