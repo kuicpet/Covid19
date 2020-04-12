@@ -8,7 +8,7 @@ const data = {
     avgDailyIncomeInUSD: 5,
     avgDailyIncomePopulation: 0.71
   },
-  periodType: 'days',
+  periodType: 'weeks',
   timeToElapse: 58,
   reportedCases: 674,
   population: 66622705,
@@ -44,37 +44,16 @@ const calculateRemainingData = (infected, period) => {
   const infectionsByRequestedTime = Math.trunc(
     getInfectionsByDay(infected, period)
   );
-  /* const severeCasesByRequestedTime = Math.trunc(
-    getPercentOf(infectionsByRequestedTime, 15)
-  );
-  const hospitalBedsByRequestedTime = Math.trunc(
-    getAvailableHospitalBeds(totalHospitalBeds, 35)
-        - severeCasesByRequestedTime
-  );
-  const casesForICUByRequestedTime = Math.trunc(
-    getPercentOf(infectionsByRequestedTime, 5)
-  );
-  const casesForVentilatorsByRequestedTime = Math.trunc(
-    getPercentOf(infectionsByRequestedTime, 2)
-  );
-  const dollarsInFlight = Math.trunc(
-    getDollarsInFlight(infectionsByRequestedTime, period, region)
-  ); */
-
   return {
     currentlyInfected: infected,
     infectionsByRequestedTime
-    // severeCasesByRequestedTime,
-    // hospitalBedsByRequestedTime,
-    // casesForICUByRequestedTime,
-    // casesForVentilatorsByRequestedTime,
-    // dollarsInFlight
   };
 };
 const output = () => ({
-
+  data,
   impact: calculateRemainingData(currentlyInfected, days),
   severeImpact: calculateRemainingData(severeCurrentlyInfected, days)
 });
 output();
+
 export default covid19ImpactEstimator;
