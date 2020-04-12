@@ -44,8 +44,8 @@ const impactEstimates = () => {
   const severeCurrentlyInfected = input.reportedCases * 50;
   const severeInfectionsByRequestedTime = (severeCurrentlyInfected * multiplier);
   const output = {
-    periodType: input.periodType,
-    timeToElapse: period(),
+    // periodType: input.periodType,
+    // timeToElapse: period(),
     estimates: {
       impact: {
         currentlyInfected: impactCurrentlyInfected,
