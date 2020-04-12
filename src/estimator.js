@@ -9,18 +9,12 @@ const input = {
     avgDailyIncomeInUSD: 5,
     avgDailyIncomePopulation: 0.71
   },
-  periodType: 'weeks',
-  timeToElapse: 38,
+  periodType: 'months',
+  timeToElapse: 3,
   reportedCases: 2747,
   population: 92931687,
   totalHospitalBeds: 678874
 };
-const factor = () => {
-  const x = (Math.trunc(input.timeToElapse / 3));
-  const y = (2 ** x);
-  return y;
-};
-factor();
 
 const period = () => {
   if (input.periodType === 'months') return input.timeToElapse * 30;
@@ -30,6 +24,12 @@ const period = () => {
 };
 period();
 
+const factor = () => {
+  const x = (Math.trunc(period() / 3));
+  const y = (2 ** x);
+  return y;
+};
+factor();
 /* const beds = () => {
   const a = input.totalHospitalBeds * 0.35;
   const b = (Math.trunc(a));
