@@ -38,7 +38,7 @@ const impact = () => {
   return 0;
 };
 impact();
-const severe = () => {
+const severeImpact = () => {
   if (input.periodType === 'months') {
     const days = input.timeToElapse * 30;
     const currentlyInfected = input.reportedCases * 50;
@@ -59,13 +59,13 @@ const severe = () => {
   }
   return 0;
 };
-severe();
+severeImpact();
 
 const output = () => {
   const estimates = {
     input,
     impact: impact(),
-    severe: severe()
+    severeImpact: severeImpact()
   };
   return estimates;
 };
