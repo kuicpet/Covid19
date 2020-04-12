@@ -32,7 +32,6 @@ const getCurrentlyInfected = (reportedCases, isSevere = false) => {
 const getInfectionsByDay = (currentlyInfected, days) => {
   let factor = Math.trunc(days / 3);
   factor = 2 ** factor;
-
   return currentlyInfected * factor;
 };
 const days = getNormalisedDays(data.periodType, data.timeToElapse);
@@ -45,8 +44,10 @@ const calculateRemainingData = (infected, period) => {
     getInfectionsByDay(infected, period)
   );
   return {
-    currentlyInfected: infected,
-    infectionsByRequestedTime
+    etimates: {
+      currentlyInfected: infected,
+      infectionsByRequestedTime
+    }
   };
 };
 const output = () => ({
@@ -55,5 +56,4 @@ const output = () => ({
   severeImpact: calculateRemainingData(severeCurrentlyInfected, days)
 });
 output();
-
 export default covid19ImpactEstimator;
