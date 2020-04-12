@@ -9,11 +9,11 @@ const input = {
     avgDailyIncomeInUSD: 5,
     avgDailyIncomePopulation: 0.71
   },
-  periodType: 'months',
-  timeToElapse: 3,
-  reportedCases: 2747,
-  population: 92931687,
-  totalHospitalBeds: 678874
+  periodType: 'days',
+  timeToElapse: 58,
+  reportedCases: 674,
+  population: 66622705,
+  totalHospitalBeds: 1380614
 };
 
 const period = () => {
@@ -57,7 +57,6 @@ const impactEstimates = () => {
       }
     }
   };
-  // console.log(output);
   return output;
 };
 impactEstimates();
