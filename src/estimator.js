@@ -72,7 +72,7 @@ const calculateRemainingData = (infected, period) => {
   };
 };
 const output = () => ({
-  data,
+
   impact: calculateRemainingData(currentlyInfected, days),
   severeImpact: calculateRemainingData(severeCurrentlyInfected, days)
 });
