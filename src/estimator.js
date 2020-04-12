@@ -15,41 +15,66 @@ const data = {
   totalHospitalBeds: 1380614
 };
 
-const period = (periodType, timeToElapse) => {
+const getNormalisedDays = (periodType, days) => {
   switch (periodType) {
-    case 'months':
-      return timeToElapse * 30;
     case 'weeks':
-      return timeToElapse * 7;
+      return days * 7;
+    case 'months':
+      return days * 30;
     default:
-      return timeToElapse;
+      return days;
   }
 };
-period();
-
-const days = period(data.periodType, data.timeToElapse);
-const getCurrentlyInfected = (severe = false) => {
-  const estimatedFactor = severe ? 50 : 10;
-  return data.reportedCases * estimatedFactor;
+const getCurrentlyInfected = (reportedCases, isSevere = false) => {
+  const estimatedFactor = isSevere ? 50 : 10;
+  return reportedCases * estimatedFactor;
 };
-getCurrentlyInfected();
+const getInfectionsByDay = (currentlyInfected, days) => {
+  let factor = Math.trunc(days / 3);
+  factor = 2 ** factor;
 
-const getInfectionsByDay = (currentlyInfected) => {
-  const power = Math.trunc(data.timeToElapse / 3);
-  const factor = 2 ** power;
   return currentlyInfected * factor;
 };
-getInfectionsByDay();
-
+const days = getNormalisedDays(data.periodType, data.timeToElapse);
 const currentlyInfected = Math.trunc(getCurrentlyInfected(data.reportedCases));
-const severeCurrentlyReported = Math.trunc(getCurrentlyInfected(data.reportedCases, true));
-const infectionsByRequestedTime = Math.trunc(getInfectionsByDay(currentlyInfected, days));
-const severeInfectionsByRequestedTime = Math.trunc(getInfectionsByDay(currentlyInfected, days));
+const severeCurrentlyInfected = Math.trunc(
+  getCurrentlyInfected(data.reportedCases, true)
+);
+const calculateRemainingData = (infected, period) => {
+  const infectionsByRequestedTime = Math.trunc(
+    getInfectionsByDay(infected, period)
+  );
+  /* const severeCasesByRequestedTime = Math.trunc(
+    getPercentOf(infectionsByRequestedTime, 15)
+  );
+  const hospitalBedsByRequestedTime = Math.trunc(
+    getAvailableHospitalBeds(totalHospitalBeds, 35)
+        - severeCasesByRequestedTime
+  );
+  const casesForICUByRequestedTime = Math.trunc(
+    getPercentOf(infectionsByRequestedTime, 5)
+  );
+  const casesForVentilatorsByRequestedTime = Math.trunc(
+    getPercentOf(infectionsByRequestedTime, 2)
+  );
+  const dollarsInFlight = Math.trunc(
+    getDollarsInFlight(infectionsByRequestedTime, period, region)
+  ); */
+
+  return {
+    currentlyInfected: infected,
+    infectionsByRequestedTime
+    // severeCasesByRequestedTime,
+    // hospitalBedsByRequestedTime,
+    // casesForICUByRequestedTime,
+    // casesForVentilatorsByRequestedTime,
+    // dollarsInFlight
+  };
+};
 const output = () => ({
   data,
-  impact: { currentlyInfected, infectionsByRequestedTime },
-  svereImpact: { severeCurrentlyReported, severeInfectionsByRequestedTime }
+  impact: calculateRemainingData(currentlyInfected, days),
+  severeImpact: calculateRemainingData(severeCurrentlyInfected, days)
 });
 output();
-
 export default covid19ImpactEstimator;
