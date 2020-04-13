@@ -20,8 +20,8 @@ const covid19ImpactEstimator = (data) => {
     return reportedCases * estimatedFactor;
   };
   const getInfectionsByDay = (currentlyInfected, days) => {
-    let factor = Math.trunc(days / 3);
-    factor = 2 ** factor;
+    const power = (Math.trunc(days / 3));
+    const factor = 2 ** power;
     return currentlyInfected * factor;
   };
   const days = getNormalisedDays(periodType, timeToElapse);
