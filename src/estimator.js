@@ -15,20 +15,14 @@ const covid19ImpactEstimator = (data) => {
         return days;
     }
   };
-  const getCurrentlyInfected = (isSevere = false) => {
-    const estimatedFactor = isSevere ? 50 : 10;
-    return reportedCases * estimatedFactor;
-  };
   const getInfectionsByDay = (currentlyInfected, days) => {
     const power = (Math.trunc(days / 3));
     const factor = 2 ** power;
     return currentlyInfected * factor;
   };
   const days = getNormalisedDays(periodType, timeToElapse);
-  const currentlyInfected = Math.trunc(getCurrentlyInfected(reportedCases));
-  const severeCurrentlyInfected = Math.trunc(
-    getCurrentlyInfected(reportedCases, true)
-  );
+  const currentlyInfected = Math.trunc(reportedCases * 10);
+  const severeCurrentlyInfected = Math.trunc(reportedCases * 50);
   const output = (infected, period) => {
     const infectionsByRequestedTime = Math.trunc(
       getInfectionsByDay(infected, period)
