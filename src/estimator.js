@@ -23,8 +23,9 @@ const covid19ImpactEstimator = (data) => {
   const days = getNormalisedDays(periodType, timeToElapse);
   const currentlyInfected = Math.trunc(reportedCases * 10);
   const severeCurrentlyInfected = Math.trunc(reportedCases * 50);
-  const infectionsByRequestedTime = Math.trunc(currentlyInfected * days);
-  const severeInfectionsByRequestedTime = Math.trunc(severeCurrentlyInfected * days);
+  const infectionsByRequestedTime = Math.trunc(currentlyInfected * getInfectionsByDay(days));
+  // eslint-disable-next-line max-len
+  const severeInfectionsByRequestedTime = Math.trunc(severeCurrentlyInfected * getInfectionsByDay(days));
   return {
     data,
     impact: { currentlyInfected, infectionsByRequestedTime },
